@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verkehrsübungsplatz Forchheim</title>
+<meta name="description" content="Verkehrsübungsplatz Forchheim: Sicher fahren üben ohne Führerschein – für Kinder, Jugendliche und Erwachsene auf 25.000 m² mit echten Schildern, Ampeln und Kreisverkehr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #F4F6F5;
+    --surface: #FFFFFF;
+    --surface-alt: #EBF0EF;
+    --text: #16232C;
+    --text-muted: #51626C;
+    --border: #DCE4E3;
+    --accent: #0B5FA5;
+    --accent-strong: #083D6B;
+    --accent-soft: #E4EEF6;
+    --accent-2: #F2B705;
+    --accent-2-strong: #A87900;
+    --shadow: rgba(15, 35, 50, 0.10);
+    --asphalt: #0F2233;
+    --asphalt-lane: #24384A;
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D161F;
+      --surface: #16212B;
+      --surface-alt: #1B2733;
+      --text: #E9EEF2;
+      --text-muted: #9FB2BD;
+      --border: #29363F;
+      --accent: #5AA6E0;
+      --accent-strong: #8FC4EE;
+      --accent-soft: #1B3348;
+      --accent-2: #FFCF4D;
+      --accent-2-strong: #FFE08A;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0D161F;
+    --surface: #16212B;
+    --surface-alt: #1B2733;
+    --text: #E9EEF2;
+    --text-muted: #9FB2BD;
+    --border: #29363F;
+    --accent: #5AA6E0;
+    --accent-strong: #8FC4EE;
+    --accent-soft: #1B3348;
+    --accent-2: #FFCF4D;
+    --accent-2-strong: #FFE08A;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  /* ---------- Reset ---------- */
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Barlow", "Segoe UI", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; text-wrap: balance; margin: 0; line-height: 1.08; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  table { border-collapse: collapse; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* ---------- Layout helpers ---------- */
+  .wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  section { padding-block: clamp(3rem, 6vw, 5rem); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 46ch;
+    margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  }
+  .section-head h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
+  .section-head p { color: var(--text-muted); font-size: 1.05rem; }
+  .center { text-align: center; margin-inline: auto; }
+
+  /* Lane-marking divider: dashed road stripe between sections */
+  .lane-divider {
+    height: 4px;
+    background-image: repeating-linear-gradient(
+      to right, var(--accent-2) 0 26px, transparent 26px 44px
+    );
+    opacity: 0.9;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 20px -8px var(--shadow); }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-on-dark { background: var(--accent-2); color: #241a00; }
+  .btn-on-dark:hover { background: var(--accent-2-strong); }
+  .btn-outline-on-dark { background: transparent; border-color: rgba(255,255,255,0.5); color: #fff; }
+  .btn-outline-on-dark:hover { border-color: #fff; }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.9rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .brand-mark {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .brand-mark svg { width: 24px; height: 24px; color: #fff; }
+  .brand-text {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 1.28rem;
+    line-height: 1.05;
+  }
+  .brand-text span { display: block; font-family: "Barlow", sans-serif; font-weight: 500; font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.03em; }
+  nav.main-nav { display: none; }
+  nav.main-nav ul { display: flex; gap: 1.75rem; }
+  nav.main-nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  nav.main-nav a:hover { color: var(--accent); }
+  .header-cta { display: none; }
+  .header-cta-mobile .btn { padding: 0.6rem 1rem; font-size: 0.92rem; }
+
+  @media (min-width: 860px) {
+    nav.main-nav { display: block; }
+    .header-cta { display: inline-flex; }
+    .header-cta-mobile { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3rem);
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+  }
+  .hero h1 { font-size: clamp(2.5rem, 5.6vw, 3.9rem); margin-block: 0.9rem 1rem; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-lede { font-size: 1.15rem; color: var(--text-muted); max-width: 52ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.75rem; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px dashed var(--border);
+  }
+  @media (min-width: 560px) { .stat-row { grid-template-columns: repeat(4, 1fr); } }
+  .stat-num {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .hero-art {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 50px -20px var(--shadow);
+    background: var(--asphalt);
+  }
+  .hero-art svg { width: 100%; height: auto; }
+
+  /* ---------- Benefit cards ---------- */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 720px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+  .benefit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .icon-badge {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-badge svg { width: 26px; height: 26px; }
+  .benefit-card h3 { font-size: 1.3rem; }
+  .benefit-card p { color: var(--text-muted); }
+
+  /* ---------- Alternating band ---------- */
+  .band-alt { background: var(--surface-alt); }
+
+  /* ---------- Opening hours ---------- */
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (min-width: 820px) { .hours-grid { grid-template-columns: 1.1fr 0.9fr; } }
+  .hours-board {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 0.5rem 1.75rem;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 1.1rem;
+  }
+  .hours-row + .hours-row { border-top: 1px dashed var(--border); }
+  .hours-day { font-weight: 600; font-size: 1.05rem; }
+  .hours-time { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; }
+  .hours-row.closed .hours-time { color: var(--text-muted); font-weight: 500; }
+  .hours-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .hours-note h3 { font-size: 1.2rem; }
+  .hours-note p { color: var(--text-muted); }
+
+  /* ---------- Pricing table ---------- */
+  .price-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+  }
+  table.price-table { width: 100%; min-width: 420px; }
+  table.price-table thead th {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    text-align: left;
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 1rem 1.5rem;
+  }
+  table.price-table thead th:last-child, table.price-table td:last-child { text-align: right; }
+  table.price-table td {
+    padding: 1.1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 1.05rem;
+  }
+  table.price-table td.price {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .tag-recommend {
+    display: inline-block;
+    margin-left: 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-2-strong);
+    background: color-mix(in srgb, var(--accent-2) 25%, transparent);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    vertical-align: middle;
+  }
+  .price-note { color: var(--text-muted); font-size: 0.95rem; margin-top: 1rem; }
+
+  /* ---------- Vehicles ---------- */
+  .vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  @media (min-width: 720px) { .vehicle-grid { grid-template-columns: repeat(4, 1fr); } }
+  .vehicle-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .sign-badge {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.25);
+  }
+  .sign-badge svg { width: 34px; height: 34px; color: #fff; }
+  .vehicle-card h3 { font-size: 1.15rem; }
+  .vehicle-card p { color: var(--text-muted); font-size: 0.92rem; }
+
+  /* ---------- Location ---------- */
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) { .location-grid { grid-template-columns: 0.95fr 1.05fr; } }
+  .location-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  address { font-style: normal; }
+  .loc-line {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .loc-line svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; margin-top: 0.15rem; }
+  .loc-line a { text-decoration: none; font-weight: 600; }
+  .loc-line a:hover { color: var(--accent); }
+  .loc-line .muted { color: var(--text-muted); font-weight: 400; }
+
+  .map-art {
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--surface-alt);
+    overflow: hidden;
+  }
+  .map-art svg { width: 100%; height: auto; }
+  .map-pulse { animation: pulse 2.4s ease-in-out infinite; transform-origin: center; }
+  @keyframes pulse { 0%,100% { opacity: 0.9; r: 9; } 50% { opacity: 0.25; r: 20; } }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    background: var(--accent-strong);
+    color: #fff;
+    border-radius: 24px;
+    padding: clamp(2.25rem, 5vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  @media (min-width: 780px) {
+    .cta-band { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .cta-band h2 { font-size: clamp(1.8rem, 3.4vw, 2.4rem); max-width: 22ch; }
+  .cta-band p { color: rgba(255,255,255,0.8); margin-top: 0.5rem; max-width: 40ch; }
+  .cta-band-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; flex-shrink: 0; }
+
+  /* ---------- Legal (Impressum & Datenschutz) ---------- */
+  .legal { padding-block: clamp(2.5rem, 5vw, 3.5rem); background: var(--surface); }
+  .legal-alt { background: var(--surface-alt); }
+  .legal-block { max-width: 65ch; }
+  .legal-block h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .legal-block h3 {
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--text);
+    margin-top: 1.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .legal-block p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 0.9rem; }
+  .legal-block a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    background: var(--asphalt);
+    color: rgba(255,255,255,0.82);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding-block: 3rem;
+  }
+  @media (min-width: 720px) { .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; } }
+  .footer-grid h3 { color: #fff; font-size: 1.05rem; margin-bottom: 0.9rem; }
+  .footer-grid p, .footer-grid a { color: rgba(255,255,255,0.72); font-size: 0.95rem; }
+  .footer-grid ul { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-grid a { text-decoration: none; }
+  .footer-grid a:hover { color: #fff; }
+  .footer-brand { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.9rem; }
+  .footer-brand .brand-mark { background: var(--accent-2); }
+  .footer-brand .brand-mark svg { color: #241a00; }
+  .footer-brand span { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 1.15rem; color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-block: 1.25rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+  }
+  .footer-legal-nav a { color: rgba(255,255,255,0.55); text-decoration: none; }
+  .footer-legal-nav a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M9.2 17h5.6M12 17V9l4-2M8 9h4"/></svg>
+      </span>
+      <span class="brand-text">Verkehrsübungsplatz<span>Forchheim · FO 8</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#oeffnungszeiten">Öffnungszeiten</a></li>
+        <li><a href="#preise">Preise</a></li>
+        <li><a href="#fahrzeuge">Fahrzeuge</a></li>
+        <li><a href="#standort">Standort</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary header-cta" href="tel:+4917626977266">Jetzt anrufen</a>
+    <a class="btn btn-primary header-cta-mobile" href="tel:+4917626977266">Anrufen</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+          Seit über 30 Jahren in Forchheim
+        </span>
+        <h1>Fahren üben, <em>bevor</em> es ernst wird.</h1>
+        <p class="hero-lede">Auf 25.000&nbsp;m² mit echten Ampeln, Schildern, Zebrastreifen und Kreisverkehr – ganz ohne Straßenverkehr und ohne Führerschein. Für Kinder, Jugendliche und Erwachsene, egal wie alt.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="tel:+4917626977266">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Jetzt anrufen
+          </a>
+          <a class="btn btn-outline" href="#oeffnungszeiten">Öffnungszeiten ansehen</a>
+        </div>
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Jahre Erfahrung</div>
+          </div>
+          <div>
+            <div class="stat-num">25.000&nbsp;m²</div>
+            <div class="stat-label">Übungsgelände</div>
+          </div>
+          <div>
+            <div class="stat-num">4</div>
+            <div class="stat-label">Fahrzeugarten</div>
+          </div>
+          <div>
+            <div class="stat-num">0</div>
+            <div class="stat-label">Mindestalter</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="Schematische Darstellung des Übungsplatzes mit Fahrbahnschleife, Kreisverkehr und Zebrastreifen">
+        <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="520" height="400" rx="28" fill="#0F2233"/>
+          <path d="M84,64 H356 A78,78 0 0 1 434,142 V258 A78,78 0 0 1 356,336 H164 A78,78 0 0 1 84,258 V142 A78,78 0 0 1 84,64 Z" fill="none" stroke="#24384A" stroke-width="44" stroke-linejoin="round"/>
+          <path d="M84,64 H356 A78,78 0 0 1 434,142 V258 A78,78 0 0 1 356,336 H164 A78,78 0 0 1 84,258 V142 A78,78 0 0 1 84,64 Z" fill="none" stroke="#F4F7F6" stroke-opacity="0.85" stroke-width="3.5" stroke-dasharray="16 14" stroke-linejoin="round"/>
+
+          <!-- Zebrastreifen auf der unteren Geraden -->
+          <g fill="#F4F7F6">
+            <rect x="201" y="316" width="14" height="40" rx="2"/>
+            <rect x="227" y="316" width="14" height="40" rx="2"/>
+            <rect x="253" y="316" width="14" height="40" rx="2"/>
+            <rect x="279" y="316" width="14" height="40" rx="2"/>
+            <rect x="305" y="316" width="14" height="40" rx="2"/>
+          </g>
+
+          <!-- Kreisverkehr -->
+          <circle cx="259" cy="200" r="44" fill="#16324A" stroke="#F4F7F6" stroke-opacity="0.65" stroke-width="3" stroke-dasharray="7 8"/>
+          <circle cx="259" cy="200" r="13" fill="#F2B705"/>
+
+          <!-- Auto auf der oberen Geraden -->
+          <g transform="translate(220,64)">
+            <rect x="-11" y="-16" width="22" height="10" rx="3" fill="#F2B705"/>
+            <rect x="-18" y="-9" width="36" height="16" rx="5" fill="#F2B705"/>
+            <circle cx="-10" cy="8" r="5" fill="#0F2233"/>
+            <circle cx="10" cy="8" r="5" fill="#0F2233"/>
+          </g>
+
+          <!-- Warnschild neben der Strecke -->
+          <g transform="translate(475,84)">
+            <line x1="0" y1="14" x2="0" y2="34" stroke="#5B7186" stroke-width="4" stroke-linecap="round"/>
+            <polygon points="0,-19 17,12 -17,12" fill="#F2B705" stroke="#0F2233" stroke-width="2.5" stroke-linejoin="round"/>
+            <text x="0" y="8" font-family="Barlow, sans-serif" font-weight="700" font-size="15" text-anchor="middle" fill="#0F2233">!</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" role="presentation"></div>
+
+  <!-- WHY -->
+  <section class="band-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Warum zu uns</span>
+        <h2>Ein geschütztes Stück Straßenverkehr</h2>
+        <p>Echte Verkehrssituationen, aber ohne echten Verkehr – so lässt sich sicher üben, was später im Straßenverkehr zählt.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11.8V5l-8-3-8 3v5.2C4 17.5 12 22 12 22z"/></svg>
+          </div>
+          <h3>Geschütztes Gelände</h3>
+          <p>25.000 m² eigenes Areal ohne Autoverkehr von außen – Fehler passieren hier ohne echte Gefahr.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
+          </div>
+          <h3>Echte Infrastruktur</h3>
+          <p>Ampeln, Kreisverkehr, Zebrastreifen und Beschilderung wie im echten Straßenverkehr.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 12 0v1"/><circle cx="18" cy="9" r="2.4"/><path d="M15.5 21v-.8a4.5 4.5 0 0 1 7.5-3.4"/></svg>
+          </div>
+          <h3>Für jedes Alter</h3>
+          <p>Kein Mindestalter – vom ersten Roller-Balanceakt bis zur ersten Fahrstunde im Auto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPENING HOURS -->
+  <section id="oeffnungszeiten">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Öffnungszeiten</span>
+        <h2>Wann ihr bei uns üben könnt</h2>
+      </div>
+      <div class="hours-grid">
+        <div class="hours-board">
+          <div class="hours-row closed">
+            <span class="hours-day">Montag</span>
+            <span class="hours-time">Geschlossen</span>
+          </div>
+          <div class="hours-row closed">
+            <span class="hours-day">Dienstag</span>
+            <span class="hours-time">Geschlossen</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Mittwoch</span>
+            <span class="hours-time">15:00 – 19:00 Uhr</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Donnerstag</span>
+            <span class="hours-time">15:00 – 19:00 Uhr</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Freitag</span>
+            <span class="hours-time">15:00 – 19:00 Uhr</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Samstag</span>
+            <span class="hours-time">10:00 – 17:00 Uhr</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Sonntag</span>
+            <span class="hours-time">10:00 – 17:00 Uhr</span>
+          </div>
+        </div>
+        <div class="hours-note">
+          <h3>Am besten kurz anrufen</h3>
+          <p>Bei Fragen zu freien Zeiten oder zum Ablauf meldet euch einfach telefonisch bei Matthias Rossa – er berät euch gerne direkt.</p>
+          <a class="btn btn-primary" href="tel:+4917626977266">0176 26977266</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" role="presentation"></div>
+
+  <!-- PRICING -->
+  <section id="preise" class="band-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Preise</span>
+        <h2>Ihr zahlt nur für die Zeit, die ihr übt</h2>
+        <p>Faire Staffelpreise nach Dauer – unabhängig vom Fahrzeug.</p>
+      </div>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th scope="col">Dauer</th>
+              <th scope="col">Preis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>30 Minuten</td>
+              <td class="price">7,50&nbsp;€</td>
+            </tr>
+            <tr>
+              <td>60 Minuten <span class="tag-recommend">Empfehlung für den Einstieg</span></td>
+              <td class="price">12,50&nbsp;€</td>
+            </tr>
+            <tr>
+              <td>90 Minuten</td>
+              <td class="price">17,50&nbsp;€</td>
+            </tr>
+            <tr>
+              <td>120 Minuten</td>
+              <td class="price">22,50&nbsp;€</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="price-note">Fragen zu Gruppen oder Mehrfachbesuchen? Ruft einfach kurz an: <a href="tel:+4917626977266" style="color:var(--accent); font-weight:600; text-decoration:none;">0176 26977266</a></p>
+    </div>
+  </section>
+
+  <!-- VEHICLES -->
+  <section id="fahrzeuge">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Fahrzeuge</span>
+        <h2>Üben mit dem Fahrzeug, das zu euch passt</h2>
+        <p>Vom ersten Mofa bis zur ersten Autofahrt – bei uns ist alles ohne Führerschein möglich.</p>
+      </div>
+      <div class="vehicle-grid">
+        <div class="vehicle-card">
+          <div class="sign-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="24" r="4.2"/><circle cx="34" cy="24" r="4.2"/>
+              <path d="M10 24 17 13h11 M22 20a2.2 2.2 0 1 0 0-0.1z"/>
+              <path d="M17 13h6l7 11"/>
+            </svg>
+          </div>
+          <h3>Mofa</h3>
+          <p>Die ersten Meter auf zwei Rädern mit Motor.</p>
+        </div>
+        <div class="vehicle-card">
+          <div class="sign-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="24" r="4.4"/><circle cx="36" cy="24" r="4.4"/>
+              <path d="M11 24h13l3-11h6"/><path d="M24 24h12"/>
+            </svg>
+          </div>
+          <h3>Roller</h3>
+          <p>Gleichgewicht, Kurven und Bremsen trainieren.</p>
+        </div>
+        <div class="vehicle-card">
+          <div class="sign-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="24" r="4.6"/><circle cx="38" cy="24" r="4.6"/>
+              <path d="M10 24 20 13h9l9 11"/><path d="M20 13l4-5 6 2"/>
+            </svg>
+          </div>
+          <h3>Motorrad</h3>
+          <p>Schalten, Kuppeln und Kurventechnik üben.</p>
+        </div>
+        <div class="vehicle-card">
+          <div class="sign-badge" aria-hidden="true">
+            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 22h-1v-4h6l4-6h13l4 6h6v4h-1"/>
+              <circle cx="14" cy="22" r="4"/><circle cx="34" cy="22" r="4"/>
+            </svg>
+          </div>
+          <h3>PKW</h3>
+          <p>Erste Fahrstunden: Anfahren, Einparken, Verkehrsregeln.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lane-divider" role="presentation"></div>
+
+  <!-- LOCATION -->
+  <section id="standort" class="band-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Standort</span>
+        <h2>So findet ihr uns</h2>
+      </div>
+      <div class="location-grid">
+        <div class="location-card">
+          <address>
+            <div class="loc-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>FO 8<br><span class="muted">91301 Forchheim</span></div>
+            </div>
+            <div class="loc-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+4917626977266">0176 26977266</a>
+            </div>
+            <div class="loc-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+              <a href="mailto:matthias.rossa@freenet.de">matthias.rossa@freenet.de</a>
+            </div>
+          </address>
+          <a class="btn btn-outline" href="https://www.google.com/maps/place/Verkehrs%C3%BCbungsplatz+Forchheim/@49.6937789,11.0826396,17z/data=!3m1!4b1!4m6!3m5!1s0x47a1f6df523d5787:0x2992d3302a4a1a82!8m2!3d49.6937789!4d11.0826396!16s%2Fg%2F1tdq03t5?hl=de" target="_blank" rel="noopener">
+            Route planen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+
+        <div class="map-art" role="img" aria-label="Schematische Karte mit Standortmarkierung FO 8 in Forchheim">
+          <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="440" height="300" fill="var(--surface-alt)"/>
+            <g stroke="var(--border)" stroke-width="10">
+              <line x1="0" y1="70" x2="440" y2="70"/>
+              <line x1="0" y1="200" x2="440" y2="200"/>
+              <line x1="110" y1="0" x2="110" y2="300"/>
+              <line x1="320" y1="0" x2="320" y2="300"/>
+            </g>
+            <g stroke="var(--border)" stroke-width="3" stroke-dasharray="10 8">
+              <line x1="0" y1="70" x2="440" y2="70"/>
+              <line x1="0" y1="200" x2="440" y2="200"/>
+              <line x1="110" y1="0" x2="110" y2="300"/>
+              <line x1="320" y1="0" x2="320" y2="300"/>
+            </g>
+            <circle class="map-pulse" cx="220" cy="135" r="20" fill="var(--accent)" opacity="0.25"/>
+            <path d="M220 108c-14 0-24 10-24 24 0 18 24 46 24 46s24-28 24-46c0-14-10-24-24-24z" fill="var(--accent)"/>
+            <circle cx="220" cy="131" r="8" fill="var(--surface)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>Bereit für die erste Fahrstunde ohne Führerschein?</h2>
+          <p>Matthias Rossa und sein Team freuen sich auf euch – ruft an oder schreibt eine kurze E-Mail.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn btn-on-dark" href="tel:+4917626977266">Jetzt anrufen</a>
+          <a class="btn btn-outline-on-dark" href="mailto:matthias.rossa@freenet.de">E-Mail schreiben</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M9.2 17h5.6M12 17V9l4-2M8 9h4"/></svg>
+        </span>
+        <span>Verkehrsübungsplatz Forchheim</span>
+      </div>
+      <p>Seit über 30 Jahren der sichere Ort in Forchheim, um Fahren zu üben – ganz ohne Führerschein.</p>
+    </div>
+    <div>
+      <h3>Seiten</h3>
+      <ul>
+        <li><a href="#oeffnungszeiten">Öffnungszeiten</a></li>
+        <li><a href="#preise">Preise</a></li>
+        <li><a href="#fahrzeuge">Fahrzeuge</a></li>
+        <li><a href="#standort">Standort</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Kontakt</h3>
+      <ul>
+        <li><a href="tel:+4917626977266">0176 26977266</a></li>
+        <li><a href="mailto:matthias.rossa@freenet.de">matthias.rossa@freenet.de</a></li>
+        <li>FO 8, 91301 Forchheim</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Verkehrsübungsplatz Forchheim · Inhaber Matthias Rossa</span>
+    <nav class="footer-legal-nav" aria-label="Rechtliches"><a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a></nav>
+    <span>Mi–Fr 15–19 Uhr · Sa–So 10–17 Uhr</span>
+  </div>
+</footer>
+
+<section id="impressum" class="legal">
+  <div class="wrap legal-block">
+    <span class="eyebrow">Impressum</span>
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>
+      Matthias Rossa<br>
+      Verkehrsübungsplatz Forchheim<br>
+      FO 8<br>
+      91301 Forchheim
+    </p>
+    <h3>Kontakt</h3>
+    <p>
+      Telefon: <a href="tel:+4917626977266">0176 26977266</a><br>
+      E-Mail: <a href="mailto:matthias.rossa@freenet.de">matthias.rossa@freenet.de</a>
+    </p>
+    <h3>EU-Streitschlichtung</h3>
+    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+</section>
+
+<section id="datenschutz" class="legal legal-alt">
+  <div class="wrap legal-block">
+    <span class="eyebrow">Datenschutz</span>
+    <h2>Datenschutzerklärung</h2>
+    <h3>Verantwortlicher</h3>
+    <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist Matthias Rossa, FO 8, 91301 Forchheim, <a href="mailto:matthias.rossa@freenet.de">matthias.rossa@freenet.de</a>.</p>
+    <h3>Hosting und Server-Logfiles</h3>
+    <p>Beim Aufruf dieser Website erfasst der Webhoster automatisch Informationen in sogenannten Server-Logfiles, die dein Browser übermittelt – etwa IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite und Browsertyp. Diese Daten dienen der technischen Bereitstellung und Absicherung der Website und werden nicht mit anderen Datenquellen zusammengeführt.</p>
+    <h3>Google Fonts</h3>
+    <p>Diese Website bindet Schriftarten von Google Fonts ein, die von Servern der Google Ireland Limited geladen werden. Dabei kann deine IP-Adresse an Google übertragen werden. Rechtsgrundlage ist unser berechtigtes Interesse an einer einheitlichen und schnellen Darstellung der Seite (Art. 6 Abs. 1 lit. f DSGVO).</p>
+    <h3>Kontaktaufnahme</h3>
+    <p>Wenn du uns per Telefon oder E-Mail kontaktierst, verarbeiten wir die dabei mitgeteilten Daten – etwa Name, Kontaktdaten und Anliegen – ausschließlich zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.</p>
+    <h3>Cookies und Tracking</h3>
+    <p>Diese Website verwendet keine Cookies und keine Analyse- oder Trackingtools.</p>
+    <h3>Externe Links</h3>
+    <p>Der Button „Route planen" verlinkt auf Google Maps. Dabei öffnet sich Google Maps in einem neuen Tab; es werden keine Daten übertragen, solange du den Link nicht aktiv anklickst. Für die verlinkte Seite gilt die Datenschutzerklärung von Google.</p>
+    <h3>Deine Rechte</h3>
+    <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung deiner personenbezogenen Daten sowie ein Widerspruchs- und Beschwerderecht bei der zuständigen Aufsichtsbehörde, dem Bayerischen Landesamt für Datenschutzaufsicht.</p>
+  </div>
+</section>
+
+</body>
+</html>
